@@ -1,0 +1,15 @@
+{
+    "blogs":[
+        {"title":"My typing speed",
+         "body":"is 85wpm", 
+         "author":"ZAHIN", 
+         "id":1
+        },
+
+        {"title":"Practice",
+         "body":"makes perfect",
+        "author":"Fariya",
+         "id":2
+        }
+    ]
+}
