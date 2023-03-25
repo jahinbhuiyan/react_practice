@@ -33,3 +33,10 @@ const Home = () => {
 }
  
 export default Home;
+
+
+
+//  /blogs              GET         fetch all blogs
+// /blogs/{id}          GET         Feth a single blog
+// /blogs               POST        Add a new blog
+// /blogs/{id}          DELETE      Delete a blog
