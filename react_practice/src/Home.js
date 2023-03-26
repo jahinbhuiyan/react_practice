@@ -3,14 +3,8 @@ import BlogList from './BlogList';
 
 const Home = () => {
 
-    const [blogs, setBlogs] = useState([
-        {title:'My typing speed', body:'is 85wpm', author:'ZAHIN', id:1},
-        {title:'Practice', body:'makes perfect', author:'Fariya', id:2},
-        {title:'I need to stop', body:'using your name', author:'death', id:3}
-
-    ]);
-
-    const [name, setName] = useState('MARIO')
+    const [blogs, setBlogs] = useState(null);
+    const [isPending, setIsPending] = useState(true);
 
     const handleDelete = (id) => {
        const newBlogs = blogs.filter(blog => blog.id !== id )  
@@ -18,16 +12,31 @@ const Home = () => {
     }
 
     useEffect(()=>{
-        console.log("running use EFFECT")
-    }, [name]);
+        setTimeout(() =>{
+            fetch('http://localhost:3000/blogs ')   
+        .then(res =>{
+            if(res.ok){
+                return res.json();
+            }
+        })
+        .then((data) =>{
+            console.log(data)
+            setBlogs(data)
+            setIsPending(false)
+        })
+        .catch((error)=>{
+            console.log(error.message)
+        })
+        },1000)
+    }, []);
 
 
 
     return ( 
         <div className="home">
-          <BlogList blogs={blogs} title="All blogs!" handleDelete={handleDelete} />
-          <button onClick={()=> setName('Luigi')}>Change Name</button>
-          <p>{name}</p>
+            {isPending && <div> Loading... </div> }
+            {blogs && <BlogList blogs={blogs} title="All blogs!" handleDelete={handleDelete} />}
+
         </div>
      );
 }
